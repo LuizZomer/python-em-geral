@@ -49,6 +49,7 @@ while True:
             if deletar > len(estoque)-1:
                 print('Numero inxistente')
             else:
+                print(f'O produtos {estoque[deletar]["nome"]} foi apagado com sucesso')
                 estoque.pop(deletar)
                 sleep(1)
         case 4:
