@@ -15,7 +15,7 @@ l = [
 
 
 # l.sort(key=lambda item: item['nome']) Realmente modifica a lista
-l1 = sorted(l, key=lambda item: item['nome']) #Faz uma copia rasa da lista
+l1 = sorted(l, key=lambda item: item['nome']) #Faz uma copia rasa da lista para a variavel
 
 for pessoa in l1:
     print(pessoa)
