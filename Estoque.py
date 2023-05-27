@@ -27,11 +27,36 @@ while True:
                 print('O estoque está vazio')
                 sleep(1)
             else:
-                print(f'{"nº":<1} |   {"Nome":^5}  |  {"preço":>1}')
-                for p in estoque:
-                    print(f'{cont:<1}  {p["nome"]:^10} {p["preco"]:>5}')
-                    cont+=1
+                print('Visualizar por:\n1 - Ordem adicionada\n2 - Nome\n3 - preço')
+                filtrotxt = input('Escolha uma opção: ')
+                try:
+                    filtro = int(filtrotxt)
+                except (ValueError,TypeError):
+                    print('Opção não é um numero inteiro')
                     sleep(1)
+                    continue
+                if filtro > 3 or filtro < 1:
+                    print('Opção não existente')
+                else:
+                    print(f'{"nº":<1} |   {"Nome":^5}  |  {"preço":>1}')
+                    match (filtro):
+                        case 1:
+                            for p in estoque:
+                                print(f'{cont:<1}  {p["nome"]:^10} {p["preco"]:>5}')
+                                cont+=1
+                                sleep(0.5)
+                        case 2:
+                            ordenada_nome = sorted(estoque, key=lambda produto: produto['nome'])
+                            for p in ordenada_nome:
+                                print(f'{cont:<1}  {p["nome"]:^10} {p["preco"]:>5}')
+                                cont+=1
+                                sleep(0.5)
+                        case 3:
+                            ordenada_preco = sorted(estoque, key=lambda produto: produto['preco'])
+                            for p in ordenada_preco:
+                                print(f'{cont:<1}  {p["nome"]:^10} {p["preco"]:>5}')
+                                cont+=1
+                                sleep(0.5)
         case 2:
             titulo('Cadastro de produtos')
             produto['nome'] = input('Nome do produto: ')
