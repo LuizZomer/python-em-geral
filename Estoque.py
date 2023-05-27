@@ -60,7 +60,12 @@ while True:
         case 2:
             titulo('Cadastro de produtos')
             produto['nome'] = input('Nome do produto: ')
-            produto['preco'] = input('Preço do produto: ')
+            while True:
+                try:
+                    produto['preco'] = float(input('Preço do produto: '))
+                    break
+                except (ValueError, TypeError):
+                    print('Impossivel anexar esse preço ao produto')
             print(f'O produto {produto["nome"]} foi cadastrado com sucesso.')
             estoque.append(produto.copy())
             produto.clear()
