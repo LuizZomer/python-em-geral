@@ -26,8 +26,6 @@ def reverso(var):
             print('Esse valor não é um numero inteiro')
 
 
-
-
 produto = {}
 
 estoque = []
