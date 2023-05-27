@@ -5,6 +5,29 @@ def titulo(msg):
     print(f'{msg:^40}')
     print('='*40)
 
+
+def cabecalho():
+    print(f'{"nº":<1} |   {"Nome":^5}  |  {"preço":>1}')
+
+
+def reverso(var):
+    print(f'Deseja mostrar o {var} em ordem crescente\n1 - Sim\n2 - Não')
+    while True:
+        try:
+            escolhatxt = input('Selecione a opção: ')
+            escolha = int(escolhatxt) 
+            if escolha > 2 or escolha < 1:
+                print('Essa opção não existe')
+            else:
+                if escolha == 1:
+                    return False
+                return True
+        except (ValueError, TypeError):
+            print('Esse valor não é um numero inteiro')
+
+
+
+
 produto = {}
 
 estoque = []
@@ -38,21 +61,25 @@ while True:
                 if filtro > 3 or filtro < 1:
                     print('Opção não existente')
                 else:
-                    print(f'{"nº":<1} |   {"Nome":^5}  |  {"preço":>1}')
                     match (filtro):
                         case 1:
+                            cabecalho()
                             for p in estoque:
                                 print(f'{cont:<1}  {p["nome"]:^10} {p["preco"]:>5}')
                                 cont+=1
                                 sleep(0.5)
                         case 2:
-                            ordenada_nome = sorted(estoque, key=lambda produto: produto['nome'])
+                            nome_reverso = reverso('nome')
+                            cabecalho()
+                            ordenada_nome = sorted(estoque, key=lambda produto: produto['nome'], reverse=nome_reverso )
                             for p in ordenada_nome:
                                 print(f'{cont:<1}  {p["nome"]:^10} {p["preco"]:>5}')
                                 cont+=1
                                 sleep(0.5)
                         case 3:
-                            ordenada_preco = sorted(estoque, key=lambda produto: produto['preco'])
+                            preco_reverso = reverso('preço')
+                            cabecalho()
+                            ordenada_preco = sorted(estoque, key=lambda produto: produto['preco'], reverse=preco_reverso)
                             for p in ordenada_preco:
                                 print(f'{cont:<1}  {p["nome"]:^10} {p["preco"]:>5}')
                                 cont+=1
