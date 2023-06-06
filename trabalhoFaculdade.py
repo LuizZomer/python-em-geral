@@ -41,7 +41,7 @@ while True: #Loop infinito
     escolha3txt = input('Escolha a opção: ')
     escolha3 = verificador(escolha3txt,int)
     match escolha3:
-        case 1:
+        case 1: #Visualização do estoque
             titulo('Vizualização do estoque')
             print('1 - visualizar produtos\n2 - Relatório do estoque')
             escolhatxt = input('Escolha a opção: ')
@@ -82,7 +82,7 @@ while True: #Loop infinito
                                 erro('Opção')
                             
 
-                case _:
+                case _: #Nenhuma opção 
                     erro('Opção')
 
 
@@ -104,10 +104,10 @@ while True: #Loop infinito
 
                 case 2: #Deletando um produto
                     deletar = input('Nome do produto que deseja deletar(por nome): ').capitalize()
-                    if deletar in produtos:
+                    if deletar in produtos: #Caso tenha o item no dicionario
                         print(f'O produto {produtos[deletar]} foi apagado com sucesso')
                         del produtos[deletar]
-                    else:
+                    else: #Caso não tenha
                         erro('Produto')
 
                 case 3: #Editar estoque
