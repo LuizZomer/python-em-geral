@@ -6,6 +6,10 @@ def titulo(msg): #Pega a mensagem passada e transforma em um titulo
     print('='*30)
 
 
+def erro(con):
+    print(f'{con} inexistente')
+
+
 def verificador(num,tipo):
     var_teste,veri = eh_valor(num,tipo) #Função para ver se é mesmo um numero
     if veri:
@@ -33,12 +37,54 @@ produtos = {'Arroz':{'valor':4.70,'quantidade':5},'Feijão':{'valor':4.70,'quant
 
 while True: #Loop infinito
     titulo('Estoque')
-    print('1 - Vizializar estoque\n2 - Editar estoque\n3 - Sair do programa') #Menu
-    escolhatxt = input('Escolha a opção: ')
-    escolha = verificador(escolhatxt,int)
-    match escolha:
+    print('1 - Vizualizar estoque\n2 - Editar estoque\n3 - Sair do programa') #Menu
+    escolha3txt = input('Escolha a opção: ')
+    escolha3 = verificador(escolha3txt,int)
+    match escolha3:
         case 1:
+            titulo('Vizualização do estoque')
             print('1 - visualizar produtos\n2 - Relatório do estoque')
+            escolhatxt = input('Escolha a opção: ')
+            escolha = verificador(escolhatxt,int)
+
+            match escolha: #Visualizar os produtos
+                case 1:
+                    for p in produtos.keys():
+                        print(p)
+
+                case 2: #Relatório do estoque
+                    while True:
+                        print('1 - Valor total do estoque\n2 - Quantidade total do estoque\n3 - Produtos detalhados\n4 - Sair')
+                        escolhatxt = input('Escolha uma opção: ')
+                        escolha = verificador(escolhatxt,int)
+
+                        match escolha:
+                            case 1: #Valor total do estoque
+                                valor_total = 0
+                                for p in produtos.values():
+                                    valor_total += p['valor']
+                                print(f'O valor total do estoque é {valor_total:.2f} reais')
+
+                            case 2: #Quantidade total do estoque
+                                quantidade_total = 0
+                                for p in produtos.values():
+                                     quantidade_total += p['quantidade']
+                                print(f'A quantidade total do estoque é {quantidade_total} unidades.')
+                            
+                            case 3: # Informações dos produtos
+                                for k,v in produtos.items():
+                                    print(f'O produto {k} tem {v["quantidade"]} unidades e custam {v["valor"]} cada.')
+
+                            case 4: #Voltar
+                                break
+
+                            case _: #Nenhuma opção selecionada 
+                                erro('Opção')
+                            
+
+                case _:
+                    erro('Opção')
+
 
         case 2: #Edição do estoque
             titulo('Edição do estoque')
@@ -62,39 +108,45 @@ while True: #Loop infinito
                         print(f'O produto {produtos[deletar]} foi apagado com sucesso')
                         del produtos[deletar]
                     else:
-                        print('Produto inexistente')
+                        erro('Produto')
 
                 case 3: #Editar estoque
                     editar = input('Digite o nome do produto para a edição: ').capitalize()
 
                     if editar in produtos: #Verificar se há o nome dentro do dicionario
                         print('1 - valor\n2 - quantidade')
-                        escolhatxt = input('Escolha a opção: ')
-                        escolha = verificador(escolhatxt,int)
+                        escolha3txt = input('Escolha a opção: ')
+                        escolha3 = verificador(escolha3txt,int)
 
-                        if escolha == 1: # valor
+                        if escolha3 == 1: # valor
                             valor1txt = input(f'Qual o valor você deseja atribuir ao produto {editar}: ')
                             valor1 = verificador(valor1txt,float)
                             produtos[editar]['valor'] = valor1
                             print(f'Atualizado com sucesso, agora {editar} vale {produtos[editar]["valor"]} reais')
                             
-                        elif escolha == 2: #Quantidade
+                        elif escolha3 == 2: #Quantidade
                             quantidade1txt = input(f'Qual a quantidade você deseja atribuir ao produto {editar}: ')
                             quantidade = verificador(quantidade1txt,int)
                             produtos[editar]['quantidade'] = quantidade
                             print(f'Atualizado com sucesso, agora {editar} tem {produtos[editar]["valor"]} produtos no estoque')
                             print(produtos)
                         else: # Nenhuma opção
-                            print('Opção invalida!')
+                            erro('Opção')
 
                     else:
-                        print('Produto inexistente')
+                        erro('Produto')
                     
                 case 4: #Voltar
                     continue
 
                 case _: #Nenhuma opção selecionada
-                    print('Opção inexistente')
+                    erro('Opção')
+        
+        case 3:
+            exit()
+        
+        case _:
+            erro('Opção')
 
 
 
