@@ -60,9 +60,12 @@ while True: #Loop infinito
 
                         match escolha:
                             case 1: #Valor total do estoque
-                                valor_total = 0
+                                valor_inicial = 0
+                                quantidade_total = 0
                                 for p in produtos.values():
-                                    valor_total += p['valor']
+                                    valor_inicial += p['valor']
+                                    quantidade_total += p['quantidade']
+                                valor_total = valor_inicial * quantidade_total
                                 print(f'O valor total do estoque é {valor_total:.2f} reais')
 
                             case 2: #Quantidade total do estoque
