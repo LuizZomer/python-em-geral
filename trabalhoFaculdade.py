@@ -33,7 +33,7 @@ def eh_valor(num,tipo): #Olhando se ele é um numero
 
 #Código principal
 
-produtos = {'Arroz':{'valor':4.70,'quantidade':5},'Feijão':{'valor':4.70,'quantidade':5},'Pedra':{'valor':4.70,'quantidade':5},}
+produtos = {}
 
 while True: #Loop infinito
     titulo('Estoque')
