@@ -108,7 +108,7 @@ while True: #Loop infinito
                 case 2: #Deletando um produto
                     deletar = input('Nome do produto que deseja deletar(por nome): ').capitalize()
                     if deletar in produtos: #Caso tenha o item no dicionario
-                        print(f'O produto {produtos[deletar]} foi apagado com sucesso')
+                        print(f'O produto {deletar} foi apagado com sucesso')
                         del produtos[deletar]
                     else: #Caso não tenha
                         erro('Produto')
