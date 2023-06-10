@@ -1,0 +1,16 @@
+{
+  "nome": "Zomito",
+  "nick": "jooj14",
+  "altura": 1.7,
+  "idade": 19,
+  "endereco": [
+    {
+      "rua": "Chapec\u00f3",
+      "bairro": "Jardim Elizabeth"
+    },
+    {
+      "cidade": "Cocal do sul",
+      "estado": "Santa Catarina"
+    }
+  ]
+}
