@@ -1,4 +1,16 @@
 from sys import exit
+import json
+
+caminho = 'banco.json'
+produtos = {}
+
+try:
+    with open(caminho,'r',encoding='utf8') as arquivo:
+        items = json.load(arquivo)
+        produtos = items
+except FileNotFoundError:
+    with open(caminho,'w') as arquivo:
+        print('Criei o arquivo')
 
 def titulo(msg): #Pega a mensagem passada e transforma em um titulo
     print('='*30)
@@ -33,7 +45,7 @@ def eh_valor(num,tipo): #Olhando se ele é um numero
 
 #Código principal
 
-produtos = {}
+
 
 while True: #Loop infinito
     titulo('Estoque')
@@ -149,10 +161,14 @@ while True: #Loop infinito
                     erro('Opção')
         
         case 3:
-            exit()
+            break
         
         case _:
             erro('Opção')
+
+
+with open(caminho,'w') as arquivo:
+    json.dump(produtos,arquivo,indent=2)
 
 
 
