@@ -14,7 +14,7 @@ def verificador(num,tipo):
     var_teste,veri = eh_valor(num,tipo) #Função para ver se é mesmo um numero
     if veri:
         while var_teste:
-            num = input('ERRO!Digite um valor valido: ') #Vai entrar em looping até o usuario digitar um valor valido
+            num = input('ERRO!Digite um valor valido: ').replace(',','.') #Vai entrar em looping até o usuario digitar um valor valido
             var_teste,veri = eh_valor(num,tipo) #Chama a função de verificação 
         return tipo(num)
     else:
@@ -42,51 +42,54 @@ while True: #Loop infinito
     escolha3 = verificador(escolha3txt,int)
     match escolha3:
         case 1: #Visualização do estoque
-            titulo('Vizualização do estoque')
-            print('1 - visualizar produtos\n2 - Relatório do estoque')
-            escolhatxt = input('Escolha a opção: ')
-            escolha = verificador(escolhatxt,int)
+            if len(produtos) == 0:
+                print('O estoque está Vazio')
+            else:
+                titulo('Vizualização do estoque')
+                print('1 - visualizar produtos\n2 - Relatório do estoque')
+                escolhatxt = input('Escolha a opção: ')
+                escolha = verificador(escolhatxt,int)
 
-            match escolha: #Visualizar os produtos
-                case 1:
-                    for p in produtos.keys():
-                        print(p)
+                match escolha: #Visualizar os produtos
+                    case 1:
+                        for p in produtos.keys():
+                            print(p)
 
-                case 2: #Relatório do estoque
-                    while True:
-                        print('1 - Valor total do estoque\n2 - Quantidade total do estoque\n3 - Produtos detalhados\n4 - Sair')
-                        escolhatxt = input('Escolha uma opção: ')
-                        escolha = verificador(escolhatxt,int)
+                    case 2: #Relatório do estoque
+                        while True:
+                            print('1 - Valor total do estoque\n2 - Quantidade total do estoque\n3 - Produtos detalhados\n4 - Sair')
+                            escolhatxt = input('Escolha uma opção: ')
+                            escolha = verificador(escolhatxt,int)
 
-                        match escolha:
-                            case 1: #Valor total do estoque
-                                valor_inicial = 0
-                                quantidade_total = 0
-                                for p in produtos.values():
-                                    valor_inicial += p['valor']
-                                    quantidade_total += p['quantidade']
-                                valor_total = valor_inicial * quantidade_total
-                                print(f'O valor total do estoque é {valor_total:.2f} reais')
+                            match escolha:
+                                case 1: #Valor total do estoque
+                                    valor_inicial = 0
+                                    quantidade_total = 0
+                                    for p in produtos.values():
+                                        valor_inicial += p['valor']
+                                        quantidade_total += p['quantidade']
+                                    valor_total = valor_inicial * quantidade_total
+                                    print(f'O valor total do estoque é {valor_total:.2f} reais')
 
-                            case 2: #Quantidade total do estoque
-                                quantidade_total = 0
-                                for p in produtos.values():
-                                     quantidade_total += p['quantidade']
-                                print(f'A quantidade total do estoque é {quantidade_total} unidades.')
+                                case 2: #Quantidade total do estoque
+                                    quantidade_total = 0
+                                    for p in produtos.values():
+                                        quantidade_total += p['quantidade']
+                                    print(f'A quantidade total do estoque é {quantidade_total} unidades.')
+                                
+                                case 3: # Informações dos produtos
+                                    for k,v in produtos.items():
+                                        print(f'O produto {k} tem {v["quantidade"]} unidades e custam {v["valor"]} cada.')
+
+                                case 4: #Voltar
+                                    break
+
+                                case _: #Nenhuma opção selecionada 
+                                    erro('Opção')
                             
-                            case 3: # Informações dos produtos
-                                for k,v in produtos.items():
-                                    print(f'O produto {k} tem {v["quantidade"]} unidades e custam {v["valor"]} cada.')
 
-                            case 4: #Voltar
-                                break
-
-                            case _: #Nenhuma opção selecionada 
-                                erro('Opção')
-                            
-
-                case _: #Nenhuma opção 
-                    erro('Opção')
+                    case _: #Nenhuma opção 
+                        erro('Opção')
 
 
         case 2: #Edição do estoque
@@ -99,7 +102,7 @@ while True: #Loop infinito
             match escolha1:
                 case 1: #Adicionando produto
                     nome = input('Nome do produto: ').capitalize()
-                    valortxt = input('O preço da unidade do produto: ') #valor do produto em string
+                    valortxt = input('O preço da unidade do produto: ').replace(',','.') #valor do produto em string
                     valor = verificador(valortxt,float) #Após entrar no verificador, ele retorna o tipo certo
                     quantidadetxt = input('A quantidade do produto: ') #quantidade do produto em string
                     quantidade = verificador(quantidadetxt,int) #Após entrar no verificador, ele retorna o tipo certo
