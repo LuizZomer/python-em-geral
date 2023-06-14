@@ -1,5 +1,6 @@
 from sys import exit
 import json
+from os import system
 
 caminho = 'banco.json'
 produtos = {}
@@ -10,7 +11,7 @@ try:
         produtos = items
 except FileNotFoundError:
     with open(caminho,'w') as arquivo:
-        print('Criei o arquivo')
+        json.dump(produtos,arquivo)
 
 def titulo(msg): #Pega a mensagem passada e transforma em um titulo
     print('='*30)
@@ -55,8 +56,11 @@ while True: #Loop infinito
     match escolha3:
         case 1: #Visualização do estoque
             if len(produtos) == 0:
+                system('cls')
                 print('O estoque está Vazio')
+                
             else:
+                system('cls')
                 titulo('Vizualização do estoque')
                 print('1 - visualizar produtos\n2 - Relatório do estoque')
                 escolhatxt = input('Escolha a opção: ')
@@ -65,16 +69,19 @@ while True: #Loop infinito
                 match escolha: #Visualizar os produtos
                     case 1:
                         for p in produtos.keys():
+                            system('cls')
                             print(p)
 
                     case 2: #Relatório do estoque
                         while True:
+                            system('cls')
                             print('1 - Valor total do estoque\n2 - Quantidade total do estoque\n3 - Produtos detalhados\n4 - Sair')
                             escolhatxt = input('Escolha uma opção: ')
                             escolha = verificador(escolhatxt,int)
 
                             match escolha:
                                 case 1: #Valor total do estoque
+                                    system('cls')
                                     valor_inicial = 0
                                     quantidade_total = 0
                                     for p in produtos.values():
@@ -84,16 +91,19 @@ while True: #Loop infinito
                                     print(f'O valor total do estoque é {valor_total:.2f} reais')
 
                                 case 2: #Quantidade total do estoque
+                                    system('cls')
                                     quantidade_total = 0
                                     for p in produtos.values():
                                         quantidade_total += p['quantidade']
                                     print(f'A quantidade total do estoque é {quantidade_total} unidades.')
                                 
                                 case 3: # Informações dos produtos
+                                    system('cls')
                                     for k,v in produtos.items():
                                         print(f'O produto {k} tem {v["quantidade"]} unidades e custam {v["valor"]} cada.')
 
                                 case 4: #Voltar
+                                    system('cls')
                                     break
 
                                 case _: #Nenhuma opção selecionada 
@@ -105,6 +115,7 @@ while True: #Loop infinito
 
 
         case 2: #Edição do estoque
+            system('cls')
             titulo('Edição do estoque')
             print('1 - Adicionar produto\n2 - deletar produto\n3 - Atualizar produto\n4 - Voltar')
 
@@ -113,6 +124,7 @@ while True: #Loop infinito
 
             match escolha1:
                 case 1: #Adicionando produto
+                    system('cls')
                     nome = input('Nome do produto: ').capitalize()
                     valortxt = input('O preço da unidade do produto: ').replace(',','.') #valor do produto em string
                     valor = verificador(valortxt,float) #Após entrar no verificador, ele retorna o tipo certo
@@ -121,6 +133,7 @@ while True: #Loop infinito
                     produtos[nome] = {'valor': valor, 'quantidade': quantidade}
 
                 case 2: #Deletando um produto
+                    system('cls')
                     deletar = input('Nome do produto que deseja deletar(por nome): ').capitalize()
                     if deletar in produtos: #Caso tenha o item no dicionario
                         print(f'O produto {deletar} foi apagado com sucesso')
@@ -129,6 +142,7 @@ while True: #Loop infinito
                         erro('Produto')
 
                 case 3: #Editar estoque
+                    system('cls')
                     editar = input('Digite o nome do produto para a edição: ').capitalize()
 
                     if editar in produtos: #Verificar se há o nome dentro do dicionario
