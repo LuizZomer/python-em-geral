@@ -68,13 +68,12 @@ while True: #Loop infinito
 
                 match escolha: #Visualizar os produtos
                     case 1:
+                        system('cls')
                         for p in produtos.keys():
-                            system('cls')
                             print(p)
 
                     case 2: #Relatório do estoque
                         while True:
-                            system('cls')
                             print('1 - Valor total do estoque\n2 - Quantidade total do estoque\n3 - Produtos detalhados\n4 - Sair')
                             escolhatxt = input('Escolha uma opção: ')
                             escolha = verificador(escolhatxt,int)
@@ -82,12 +81,11 @@ while True: #Loop infinito
                             match escolha:
                                 case 1: #Valor total do estoque
                                     system('cls')
-                                    valor_inicial = 0
+                                    valor_total = 0
                                     quantidade_total = 0
                                     for p in produtos.values():
-                                        valor_inicial += p['valor']
+                                        valor_total += p['valor'] * p['quantidade']
                                         quantidade_total += p['quantidade']
-                                    valor_total = valor_inicial * quantidade_total
                                     print(f'O valor total do estoque é {valor_total:.2f} reais')
 
                                 case 2: #Quantidade total do estoque
